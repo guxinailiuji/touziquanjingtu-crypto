@@ -220,19 +220,21 @@ class D3ForceGraph {
         this.nodeElements.append('circle')
             .attr('r', d => d.radius)
             .attr('class', d => {
-                // 如果节点名称是比特币/以太坊/Solana相关，不添加类以便后面用图标替换
+                // 如果节点名称是比特币/以太坊/Solana/Trump相关，不添加类以便后面用图标替换
                 if (d.name && (d.name.includes('比特币') || d.name.includes('BTC') || d.name.includes('Bitcoin'))) {
                     return 'node-circle d-none';
                 } else if (d.name && (d.name.includes('以太坊') || d.name.includes('ETH') || d.name.includes('Ethereum'))) {
                     return 'node-circle d-none';
                 } else if (d.name && (d.name.includes('Solana') || d.name.includes('SOL'))) {
                     return 'node-circle d-none';
+                } else if (d.id === 'trump') {
+                    return 'node-circle d-none';
                 } else {
                     return 'node-circle';
                 }
             });
             
-        // 为比特币/以太坊/Solana节点添加SVG图标
+        // 为比特币/以太坊/Solana/Trump节点添加SVG图标
         this.nodeElements.each(function(d) {
             if (d.name && (d.name.includes('比特币') || d.name.includes('BTC') || d.name.includes('Bitcoin'))) {
                 d3.select(this)
@@ -258,6 +260,14 @@ class D3ForceGraph {
                     .attr('height', d.radius * 2)
                     .attr('x', -d.radius)
                     .attr('y', -d.radius);
+            } else if (d.id === 'trump') {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'Trump.svg')
+                    .attr('width', d.radius * 6)
+                    .attr('height', d.radius * 6)
+                    .attr('x', -d.radius * 3)
+                    .attr('y', -d.radius * 3);
             }
         });
         
