@@ -1,0 +1,113 @@
+{
+    "sectors": {
+        "energy": {
+            "name": "能源赛道",
+            "images": [
+                {
+                    "path": "supernova1.png",
+                    "name": "超新星爆发",
+                    "scale": 1.2
+                },
+                {
+                    "path": "neutron-star1.png",
+                    "name": "脉冲星",
+                    "scale": 1.0
+                },
+                {
+                    "path": "quasar1.png",
+                    "name": "类星体",
+                    "scale": 1.3
+                }
+            ]
+        },
+        "nev": {
+            "name": "新能源汽车",
+            "images": [
+                {
+                    "path": "blue-giant1.png",
+                    "name": "蓝巨星",
+                    "scale": 1.1
+                },
+                {
+                    "path": "nebula1.png",
+                    "name": "星云",
+                    "scale": 1.2
+                }
+            ]
+        },
+        "chip": {
+            "name": "芯片",
+            "images": [
+                {
+                    "path": "white-dwarf1.png",
+                    "name": "白矮星",
+                    "scale": 0.9
+                },
+                {
+                    "path": "binary-star1.png",
+                    "name": "双星系统",
+                    "scale": 1.1
+                }
+            ]
+        },
+        "ai": {
+            "name": "人工智能",
+            "images": [
+                {
+                    "path": "galaxy1.png",
+                    "name": "星系",
+                    "scale": 1.2
+                },
+                {
+                    "path": "black-hole1.png",
+                    "name": "黑洞",
+                    "scale": 1.0
+                }
+            ]
+        },
+        "robotics": {
+            "name": "机器人",
+            "images": [
+                {
+                    "path": "star-cluster1.png",
+                    "name": "星团",
+                    "scale": 1.1
+                },
+                {
+                    "path": "planetary-nebula1.png",
+                    "name": "行星状星云",
+                    "scale": 1.0
+                }
+            ]
+        }
+    },
+    "companies": {
+        "images": [
+            {
+                "path": "satellite1.png",
+                "name": "通信卫星",
+                "scale": 0.7
+            },
+            {
+                "path": "space-station1.png",
+                "name": "空间站",
+                "scale": 0.8
+            },
+            {
+                "path": "probe1.png",
+                "name": "探测器",
+                "scale": 0.6
+            },
+            {
+                "path": "telescope1.png",
+                "name": "太空望远镜",
+                "scale": 0.7
+            },
+            {
+                "path": "asteroid1.png",
+                "name": "小行星",
+                "scale": 0.5
+            }
+        ]
+    }
+} 

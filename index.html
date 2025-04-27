@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>加密货币市场全景图</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lucide-icon@0.24.0/dist/lucide-icon.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+</head>
+<body>
+    <div class="max-w-[1920px] mx-auto px-4 py-8">
+        <header class="mb-8">
+            <h1 class="text-3xl font-bold text-center mb-2">加密货币市场全景图</h1>
+            <div class="text-center">
+                <p class="text-gray-400 font-geist-mono mb-1">探索加密货币生态系统的关联关系</p>
+                <p class="text-sm text-gray-500">by 不霁何虹</p>
+            </div>
+        </header>
+        
+        <!-- 控制按钮 -->
+        <div class="flex justify-end items-center mb-4">
+            <div class="view-controls flex items-center space-x-4">
+                <button id="starfield-toggle" class="theme-control-btn px-4 py-2 rounded-md transition-colors flex items-center" title="切换星空动画">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" class="stars-icon"/>
+                        <circle cx="12" cy="12" r="3"/>
+                        <path d="m12 3 4 2.5"/>
+                        <path d="M12 3v4"/>
+                        <path d="M12 3 8.5 5.5"/>
+                    </svg>
+                </button>
+                <button id="theme-toggle" class="theme-control-btn px-4 py-2 rounded-md transition-colors flex items-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 theme-toggle-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" class="moon-icon"/>
+                        <circle cx="12" cy="12" r="5" class="sun-icon hidden"/>
+                        <line x1="12" y1="1" x2="12" y2="3" class="sun-icon hidden"/>
+                        <line x1="12" y1="21" x2="12" y2="23" class="sun-icon hidden"/>
+                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" class="sun-icon hidden"/>
+                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" class="sun-icon hidden"/>
+                        <line x1="1" y1="12" x2="3" y2="12" class="sun-icon hidden"/>
+                        <line x1="21" y1="12" x2="23" y2="12" class="sun-icon hidden"/>
+                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" class="sun-icon hidden"/>
+                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" class="sun-icon hidden"/>
+                    </svg>
+                </button>
+                <button id="reset-zoom" class="theme-control-btn px-4 py-2 rounded-md transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8V4m0 0h4M4 4l5 5m11-1V4m0 0h-4m4 0l-5 5M4 16v4m0 0h4m-4 0l5-5m11 5v-4m0 0h-4m4 0l-5-5" />
+                    </svg>
+                </button>
+                <div class="flex items-center space-x-2">
+                    <span class="text-sm">关系强度</span>
+                    <input 
+                        type="range" 
+                        id="link-strength" 
+                        min="0.1" 
+                        max="1" 
+                        step="0.1" 
+                        value="0.5"
+                        class="w-24 accent-blue-500"
+                    >
+                </div>
+            </div>
+        </div>
+        
+        <!-- 主要内容区域 -->
+        <div class="flex gap-4 mb-16 relative">
+            <!-- 全景图 -->
+            <div class="flex-1">
+                <div class="graph-container h-[800px] relative">
+                    <div id="graph"></div>
+                    <div id="tooltip" class="hidden absolute p-3 rounded-md shadow-lg text-sm z-10 max-w-xs">
+                        <h3 class="font-bold mb-1 company-name"></h3>
+                        <div class="flex items-center mb-1">
+                            <span class="stock-code font-geist-mono mr-2"></span>
+                            <span class="sector-tag px-2 py-0.5 text-xs rounded"></span>
+                        </div>
+                        <p class="company-desc text-xs"></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 详细信息面板 -->
+            <div class="w-[400px] h-[800px] relative">
+                <div class="selected-info celestial-panel rounded-xl p-6 h-full overflow-y-auto">
+                    <h2 class="font-bold mb-4 text-xl">详细信息</h2>
+                    <div id="selected-content" class="text-sm">
+                        <p>点击节点查看详细信息</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- 底部信息面板区域 -->
+        <div class="grid grid-cols-2 gap-8 mb-16">
+            <!-- 赛道概览 -->
+            <div class="sector-panel celestial-panel rounded-xl p-6 shadow-lg">
+                <h2 class="font-bold mb-4 text-xl">赛道概览</h2>
+                <div class="sectors-list space-y-2">
+                    <!-- Sectors will be populated here -->
+                </div>
+            </div>
+            
+            <!-- 图例说明 -->
+            <div class="legend celestial-panel rounded-xl p-6 shadow-lg">
+                <h2 class="font-bold mb-4 text-xl">图例说明</h2>
+                <div class="space-y-3 text-sm">
+                    <div class="flex items-center">
+                        <span class="w-4 h-4 inline-block rounded-full mr-2"></span>
+                        <span>公链</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-4 h-4 inline-block rounded-full mr-2"></span>
+                        <span>DeFi</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-4 h-4 inline-block rounded-full mr-2"></span>
+                        <span>GameFi</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-4 h-4 inline-block rounded-full mr-2"></span>
+                        <span>MEME币</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-4 h-4 inline-block rounded-full mr-2"></span>
+                        <span>基建</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-4 h-4 inline-block rounded-full mr-2"></span>
+                        <span>AI</span>
+                    </div>
+                    <div class="mt-6 text-xs space-y-2">
+                        <p>• 节点大小表示市值/重要性</p>
+                        <p>• 连线粗细表示关联强度</p>
+                        <p>• 拖动节点可以调整布局</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="color-scheme.js"></script>
+    <script src="sector-data.js"></script>
+    <script src="companies-data.js"></script>
+    <script src="celestial-nodes.js"></script>
+    <script src="d3-force-graph.js"></script>
+    <script src="starfield.js"></script>
+    <script src="panel-effects.js"></script>
+    <script src="theme.js"></script>
+    <script src="script.js"></script>
+    
+    <script>
+        // Prevent pinch zooming
+        window.addEventListener("wheel", (e)=> {
+          const isPinching = e.ctrlKey
+          if(isPinching) e.preventDefault()
+        }, { passive: false })
+    </script>
+</body>
+</html>

@@ -1,0 +1,334 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+:root {
+  --primary-color: #3b82f6;
+  --background-color: #000000;
+  --card-background: #0f172a;
+  --text-color: #f9fafb;
+  --text-secondary: #94a3b8;
+  --border-color: #1e293b;
+  --tooltip-bg: rgba(17, 24, 39, 0.95);
+  --panel-bg: rgba(15, 23, 42, 0.4);
+  --link-color: rgba(255, 255, 255, 0.2);
+  --link-hover-color: rgba(255, 255, 255, 0.7);
+  --card-bg-rgb: 15, 23, 42;
+}
+
+:root[data-theme="light"] {
+  --primary-color: #3b82f6;
+  --background-color: #ffffff;
+  --card-background: #ffffff;
+  --text-color: #1e293b;
+  --text-secondary: #64748b;
+  --border-color: #e2e8f0;
+  --tooltip-bg: rgba(255, 255, 255, 0.95);
+  --panel-bg: rgba(255, 255, 255, 0.4);
+  --link-color: rgba(0, 0, 0, 0.2);
+  --link-hover-color: rgba(0, 0, 0, 0.7);
+  --card-bg-rgb: 255, 255, 255;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.5;
+  overflow-x: hidden;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative;
+}
+
+/* 只在深色模式下显示背景图片，作为星空的背景层 */
+:root:not([data-theme="light"]) body {
+  background: radial-gradient(ellipse at bottom, #1B2735 0%, #090A0F 100%);
+}
+
+.font-geist-mono {
+  font-family: 'SF Mono', SFMono-Regular, ui-monospace, 'DejaVu Sans Mono', Menlo, Consolas, monospace;
+}
+
+.graph-container {
+  position: relative;
+  overflow: hidden;
+  background: transparent;
+}
+
+#graph {
+  width: 100%;
+  height: 100%;
+}
+
+.sector-panel, .selected-info, .legend {
+  background: var(--panel-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+}
+
+.sector-tag {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+#tooltip {
+  pointer-events: none;
+  transition: opacity 0.2s ease;
+  background: var(--tooltip-bg);
+  backdrop-filter: blur(8px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  color: var(--text-color);
+}
+
+/* 更新节点颜色类 */
+.node-layer1 { fill: #FF9B21; }
+.node-defi { fill: #2196F3; }
+.node-gamefi { fill: #9C27B0; }
+.node-meme { fill: #E91E63; }
+.node-infra { fill: #4CAF50; }
+.node-ai { fill: #00BCD4; }
+
+.node {
+    stroke: rgba(255, 255, 255, 0.2);
+    stroke-width: 1px;
+    transition: all 0.3s ease;
+}
+
+.node:hover {
+    stroke: rgba(255, 255, 255, 0.8);
+    stroke-width: 2px;
+    filter: brightness(1.2);
+}
+
+.node.selected {
+    stroke: white;
+    stroke-width: 3px;
+    filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+}
+
+/* 添加节点发光效果 */
+.node::after {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 50%;
+    z-index: -1;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.node:hover::after {
+    opacity: 1;
+}
+
+.node-layer1::after { box-shadow: 0 0 15px rgba(255, 155, 33, 0.5); }
+.node-defi::after { box-shadow: 0 0 15px rgba(33, 150, 243, 0.5); }
+.node-gamefi::after { box-shadow: 0 0 15px rgba(156, 39, 176, 0.5); }
+.node-meme::after { box-shadow: 0 0 15px rgba(233, 30, 99, 0.5); }
+.node-infra::after { box-shadow: 0 0 15px rgba(76, 175, 80, 0.5); }
+.node-ai::after { box-shadow: 0 0 15px rgba(0, 188, 212, 0.5); }
+
+.link {
+  stroke: var(--link-color);
+  transition: stroke 0.3s ease;
+}
+
+.link:hover, .link.highlighted {
+  stroke: var(--link-hover-color);
+}
+
+/* 添加光点样式 */
+.glow-point {
+  fill: #ffffff;
+  mix-blend-mode: screen;
+}
+
+.sector-item {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sector-item:hover {
+  opacity: 0.8;
+}
+
+.node-label {
+  font-size: 10px;
+  fill: var(--text-color);
+  text-anchor: middle;
+  pointer-events: none;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/* 浅色模式下的阴影效果 */
+:root[data-theme="light"] .sector-panel,
+:root[data-theme="light"] .selected-info,
+:root[data-theme="light"] .legend {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+:root[data-theme="light"] #tooltip {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.theme-control-btn {
+  background-color: var(--card-background);
+  border: 1px solid var(--border-color);
+  color: var(--text-color);
+}
+
+.theme-control-btn:hover {
+  background-color: var(--border-color);
+}
+
+/* 文本颜色 */
+.text-gray-400 {
+  color: var(--text-secondary);
+}
+
+.text-gray-500 {
+  color: var(--text-secondary);
+}
+
+/* 面板样式 */
+.sector-panel, .selected-info, .legend {
+  background: var(--panel-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+}
+
+#selected-content {
+  color: var(--text-secondary);
+}
+
+.stock-code {
+  color: var(--text-secondary);
+}
+
+.company-desc {
+  color: var(--text-secondary);
+}
+
+#starfield {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+#starfield-toggle {
+  position: relative;
+  overflow: hidden;
+}
+
+#starfield-toggle.active {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+#starfield-toggle.active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at center, rgba(255,255,255,0.2) 0%, transparent 70%);
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 0.2;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+}
+
+.celestial-panel {
+  background: var(--panel-bg);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.celestial-panel::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0) 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+}
+
+.celestial-panel:hover::before {
+  opacity: 1;
+}
+
+/* 滚动条样式 */
+.selected-info {
+  scrollbar-width: thin;
+  scrollbar-color: var(--primary-color) transparent;
+}
+
+.selected-info::-webkit-scrollbar {
+  width: 6px;
+}
+
+.selected-info::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.selected-info::-webkit-scrollbar-thumb {
+  background-color: var(--primary-color);
+  border-radius: 3px;
+}
+
+/* 详细信息面板中的卡片样式 */
+.selected-info .info-card {
+  background: rgba(var(--card-bg-rgb), 0.3);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* 隐藏元素的通用类 */
+.d-none {
+  display: none;
+}
