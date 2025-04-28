@@ -229,6 +229,12 @@ class D3ForceGraph {
                     return 'node-circle d-none';
                 } else if (d.id === 'trump') {
                     return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('狗狗币') || d.name.includes('DOGE') || d.name.includes('Dogecoin'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Shiba') || d.name.includes('SHIB'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Pepe') || d.name.includes('PEPE'))) {
+                    return 'node-circle d-none';
                 } else {
                     return 'node-circle';
                 }
@@ -268,6 +274,30 @@ class D3ForceGraph {
                     .attr('height', d.radius * 6)
                     .attr('x', -d.radius * 3)
                     .attr('y', -d.radius * 3);
+            } else if (d.name && (d.name.includes('狗狗币') || d.name.includes('DOGE') || d.name.includes('Dogecoin'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'dogecoin-doge-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Shiba') || d.name.includes('SHIB'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'shiba-inu-shib-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Pepe') || d.name.includes('PEPE'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'pepe-pepe-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
             }
         });
         
