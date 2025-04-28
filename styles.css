@@ -300,8 +300,12 @@ body {
 
 /* 滚动条样式 */
 .selected-info {
-  scrollbar-width: thin;
-  scrollbar-color: var(--primary-color) transparent;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  min-height: 200px;
+  max-height: 400px;
 }
 
 .selected-info::-webkit-scrollbar {

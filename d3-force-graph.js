@@ -235,6 +235,34 @@ class D3ForceGraph {
                     return 'node-circle d-none';
                 } else if (d.name && (d.name.includes('Pepe') || d.name.includes('PEPE'))) {
                     return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Aave') || d.name.includes('AAVE'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Avalanche') || d.name.includes('AVAX'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Chainlink') || d.name.includes('LINK'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('MakerDAO') || d.name.includes('MKR'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Polygon') || d.name.includes('MATIC'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Uniswap') || d.name.includes('UNI'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Fetch.ai') || d.name.includes('FET'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Axie') || d.name.includes('AXS'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Gala') || d.name.includes('GALA'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Ocean Protocol') || d.name.includes('OCEAN'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('The Graph') || d.name.includes('GRT'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Sandbox') || d.name.includes('SAND'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Curve') || d.name.includes('CRV'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('SingularityNET') || d.name.includes('AGIX'))) {
+                    return 'node-circle d-none';
                 } else {
                     return 'node-circle';
                 }
@@ -294,6 +322,126 @@ class D3ForceGraph {
                 d3.select(this)
                     .append('image')
                     .attr('xlink:href', 'pepe-pepe-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Aave') || d.name.includes('AAVE'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'aave-aave-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Avalanche') || d.name.includes('AVAX'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'avalanche-avax-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Chainlink') || d.name.includes('LINK'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'chainlink-link-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('MakerDAO') || d.name.includes('MKR'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'maker-mkr-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Polygon') || d.name.includes('MATIC'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'polygon-matic-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Uniswap') || d.name.includes('UNI'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'uniswap-uni-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Fetch.ai') || d.name.includes('FET'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'artificial-superintelligence-alliance-fet-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Axie') || d.name.includes('AXS'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'axie-infinity-axs-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Gala') || d.name.includes('GALA'))) {
+                // 添加白色半透明背景圆
+                d3.select(this)
+                    .append('circle')
+                    .attr('r', d.radius)
+                    .attr('fill', 'rgba(255, 255, 255, 0.9)')
+                    .attr('class', 'logo-background');
+                    
+                // 添加GALA logo
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'gala-gala-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Ocean Protocol') || d.name.includes('OCEAN'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'ocean-protocol-ocean-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('The Graph') || d.name.includes('GRT'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'the-graph-grt-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Sandbox') || d.name.includes('SAND'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'the-sandbox-sand-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Curve') || d.name.includes('CRV'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'curve-dao-token-crv-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('SingularityNET') || d.name.includes('AGIX'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'singularitynet-agix-logo.svg')
                     .attr('width', d.radius * 2)
                     .attr('height', d.radius * 2)
                     .attr('x', -d.radius)
