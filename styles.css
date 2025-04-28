@@ -185,10 +185,18 @@ body {
   background-color: var(--card-background);
   border: 1px solid var(--border-color);
   color: var(--text-color);
+  position: relative;
 }
 
-.theme-control-btn:hover {
-  background-color: var(--border-color);
+.theme-control-btn svg {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 6px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.theme-control-btn:hover svg {
+  background: rgba(255, 255, 255, 0.2);
 }
 
 /* 文本颜色 */
