@@ -263,6 +263,12 @@ class D3ForceGraph {
                     return 'node-circle d-none';
                 } else if (d.name && (d.name.includes('SingularityNET') || d.name.includes('AGIX'))) {
                     return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Brett') || d.name.includes('BRETT'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Andy') || d.name.includes('ANDY'))) {
+                    return 'node-circle d-none';
+                } else if (d.name && (d.name.includes('Landwolf') || d.name.includes('LAND'))) {
+                    return 'node-circle d-none';
                 } else {
                     return 'node-circle';
                 }
@@ -442,6 +448,30 @@ class D3ForceGraph {
                 d3.select(this)
                     .append('image')
                     .attr('xlink:href', 'singularitynet-agix-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Brett') || d.name.includes('BRETT'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'based-brett-brett-logo.svg')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Andy') || d.name.includes('ANDY'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'andy.png')
+                    .attr('width', d.radius * 2)
+                    .attr('height', d.radius * 2)
+                    .attr('x', -d.radius)
+                    .attr('y', -d.radius);
+            } else if (d.name && (d.name.includes('Landwolf') || d.name.includes('LAND'))) {
+                d3.select(this)
+                    .append('image')
+                    .attr('xlink:href', 'landwolf.png')
                     .attr('width', d.radius * 2)
                     .attr('height', d.radius * 2)
                     .attr('x', -d.radius)

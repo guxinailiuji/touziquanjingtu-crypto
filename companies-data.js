@@ -149,8 +149,35 @@ const companies = [
         code: 'PEPE', 
         sectorId: 'meme',
         subsector: '网红币',
+        marketCap: 15,
+        desc: '基于玛特福瑞漫画形象的迷因币，具有强大的社区效应。'
+    },
+    { 
+        id: 'brett', 
+        name: 'Brett', 
+        code: 'BRETT', 
+        sectorId: 'pepe', 
+        subsector: '网红币',
+        marketCap: 8,
+        desc: '玛特福瑞漫画中的Brett形象，是Pepe的好朋友。'
+    },
+    { 
+        id: 'landwolf', 
+        name: 'Landwolf', 
+        code: 'LAND', 
+        sectorId: 'pepe', 
+        subsector: '网红币',
+        marketCap: 6,
+        desc: '玛特福瑞漫画中的Landwolf形象，是Pepe的另一个朋友。'
+    },
+    { 
+        id: 'andy', 
+        name: 'Andy', 
+        code: 'ANDY', 
+        sectorId: 'pepe', 
+        subsector: '网红币',
         marketCap: 5,
-        desc: '基于青蛙Pepe表情包的迷因币。'
+        desc: '玛特福瑞漫画中的Andy形象，是Pepe的室友。'
     },
 
     // 基建项目
@@ -223,5 +250,8 @@ const companyRelationships = [
     { source: 'ethereum', target: 'metamask', strength: 0.9, desc: 'MetaMask是主要的以太坊钱包' },
     { source: 'chainlink', target: 'aave', strength: 0.7, desc: 'Aave使用Chainlink预言机服务' },
     { source: 'uniswap', target: 'curve', strength: 0.6, desc: 'DEX领域的竞争关系' },
-    { source: 'ocean', target: 'singularity', strength: 0.5, desc: 'AI数据和服务的协同' }
+    { source: 'ocean', target: 'singularity', strength: 0.5, desc: 'AI数据和服务的协同' },
+    { source: 'pepe', target: 'brett', strength: 0.8, desc: 'Brett是Pepe的好朋友' },
+    { source: 'pepe', target: 'andy', strength: 0.8, desc: 'Andy是Pepe的室友' },
+    { source: 'pepe', target: 'landwolf', strength: 0.8, desc: 'Landwolf是Pepe的另一个朋友' }
 ];
